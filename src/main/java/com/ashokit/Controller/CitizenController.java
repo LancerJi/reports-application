@@ -1,12 +1,24 @@
 package com.ashokit.Controller;
 
+import com.ashokit.Service.ReportService;
+import com.ashokit.request.SearchRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class CitizenController {
-    @GetMapping("/greet")
-    public String greeting(){
-        return "Welcome to my site";
+
+    @Autowired
+    private ReportService reportService;
+
+    @GetMapping("/")
+    public String indexPage(Model model){
+
+        SearchRequest searchRequest= new SearchRequest();
+        model.addAttribute("search", searchRequest);
+
+        return "index";
     }
 }
